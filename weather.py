@@ -19,7 +19,15 @@ CITY_ID = 6155721 # St. Catharines, Ontario, Canada.
 UNITS = 'metric' # Celsius (use 'imperial' for Fahrenheit).
 QUERY = '?id={}&units={}'.format(CITY_ID, UNITS)
 URL = 'http://api.openweathermap.org/data/2.5/weather{}'.format(QUERY)
-json = requests.get(URL).json()
+
+try:
+    json = requests.get(URL).json()
+except:
+    print("Oh no, the request failed. Possible causes:\n"
+          "- Disconnected from the internet\n"
+          "- URL is invalid\n"
+          "- Website is down or doesn't exist")
+    sys.exit(1)
 
 # Extract relevant data from the JSON.
 city_name = json['name']
