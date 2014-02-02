@@ -1,2 +1,2 @@
-colorama==0.2.5
-requests==1.2.3
+colorama<1
+requests<3
