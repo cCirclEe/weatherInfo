@@ -44,9 +44,11 @@ temp_max = round(json['main']['temp_max'])
 # Print weather data using colorama.
 init(strip=not sys.stdout.isatty()) # Strip colors if stdout is redirected.
 
-line1 = '{}{}{}\n'.format(Style.BRIGHT, city_name, Style.RESET_ALL)
-line2 = '{}{}°{} {}{}°{} {}{}°{}\n'.format(Fore.GREEN, temp, Fore.RESET,
-                                           Fore.RED, temp_max, Fore.RESET,
-                                           Fore.BLUE, temp_min, Fore.RESET)
-line3 = '{}{}{}'.format(Style.DIM, weather_conditions, Style.RESET_ALL)
-print(line1 + line2 + line3)
+location = '{}{}\n'.format(Style.BRIGHT, city_name)
+current = '{}{}°{} {}{}{}\n'.format(Fore.GREEN, temp, Fore.RESET,
+                                    Style.DIM, weather_conditions,
+                                    Style.RESET_ALL)
+hi_lo = '{}Hi {}{}°{}  Lo {}{}°{}'.format(Style.BRIGHT, Fore.RED, temp_max,
+                                          Fore.RESET, Fore.BLUE, temp_min,
+                                          Fore.RESET)
+print(location + current + hi_lo)
