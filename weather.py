@@ -8,7 +8,7 @@
 #
 # Weather data source: OpenWeatherMap http://openweathermap.org (API v2.5)
 #
-# Copyright 2013 Dennis Ideler <ideler.dennis@gmail.com>
+# Copyright 2013-2014 Dennis Ideler (ideler.dennis@gmail.com)
 
 from colorama import init, Fore, Back, Style
 import requests
