@@ -9,7 +9,6 @@ Installation
 ------------
 
 ```
-# Clone the repo...
-pip install -r requirements.txt
+pip install -Ur requirements.txt
 ln -s `pwd`/weather.py /usr/local/bin/weather  # Optional symlink for convenience
 ```
