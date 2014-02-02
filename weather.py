@@ -37,9 +37,9 @@ for weather in json['weather']:
     descriptions.append(weather['description'])
 weather_conditions = ', '.join(descriptions).capitalize()
 
-temp = json['main']['temp']
-temp_min = json['main']['temp_min']
-temp_max = json['main']['temp_max']
+temp = round(json['main']['temp'])
+temp_min = round(json['main']['temp_min'])
+temp_max = round(json['main']['temp_max'])
 
 # Print weather data using colorama.
 init(strip=not sys.stdout.isatty()) # Strip colors if stdout is redirected.
