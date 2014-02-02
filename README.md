@@ -1,12 +1,9 @@
-simple-weather
-==============
+#### View the weather in your terminal
 
-![](http://i.imgur.com/AsczIWt.png)
+![screenshot](http://i.imgur.com/rVcseHX.png)  
+<sup>Uses [OpenWeatherMap](http://openweathermap.org) as data source.</sup>
 
-<sup>Uses [OpenWeatherMap](http://openweathermap.org) as the data source.</sup>
-
-Installation
-------------
+#### Installation
 
 ```
 pip install -Ur requirements.txt
