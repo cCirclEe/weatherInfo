@@ -1,8 +1,7 @@
 #### View the weather in your terminal
 
-![screenshot](http://i.imgur.com/rVcseHX.png)  
 <p align="center">
-  <img src="screenshot.png" width="350"/>
+  <img src="screenshot.png" style="align: left"/>
 </p>
 <sup>Uses [OpenWeatherMap](http://openweathermap.org) as data source.</sup>
 
