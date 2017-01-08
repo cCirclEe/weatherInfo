@@ -15,10 +15,10 @@ import requests
 import sys
 
 # Set up parameters and download data.
-CITY_ID = 6155721 # St. Catharines, Ontario, Canada.
+CITY_ID = 2892794 # St. Catharines, Ontario, Canada.
 UNITS = 'metric' # Celsius (use 'imperial' for Fahrenheit).
 QUERY = '?id={}&units={}'.format(CITY_ID, UNITS)
-URL = 'http://api.openweathermap.org/data/2.5/weather{}'.format(QUERY)
+URL = 'http://api.openweathermap.org/data/2.5/weather?id=2892794&APPID=7aa91ff4cf71825f909554def466be78'.format(QUERY)
 
 try:
     json = requests.get(URL).json()
@@ -37,9 +37,9 @@ for weather in json['weather']:
     descriptions.append(weather['description'])
 weather_conditions = ', '.join(descriptions).capitalize()
 
-temp = round(json['main']['temp'])
-temp_min = round(json['main']['temp_min'])
-temp_max = round(json['main']['temp_max'])
+temp = round(json['main']['temp']) - 273
+temp_min = round(json['main']['temp_min']) - 273
+temp_max = round(json['main']['temp_max']) - 273
 
 # Print weather data using colorama.
 init(strip=not sys.stdout.isatty()) # Strip colors if stdout is redirected.
@@ -52,3 +52,4 @@ hi_lo = '{}Hi {}{}°{}  Lo {}{}°{}'.format(Style.BRIGHT, Fore.RED, temp_max,
                                           Fore.RESET, Fore.BLUE, temp_min,
                                           Fore.RESET)
 print(location + current + hi_lo)
+
