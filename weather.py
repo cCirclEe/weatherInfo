@@ -15,11 +15,25 @@ import requests
 import sys
 
 # Set up parameters and download data.
-CITY_ID = 2892794 # St. Catharines, Ontario, Canada.
+CITY_ID = str('2892794') # St. Catharines, Ontario, Canada.
 UNITS = 'metric' # Celsius (use 'imperial' for Fahrenheit).
-QUERY = '?id={}&units={}'.format(CITY_ID, UNITS)
-URL = 'http://api.openweathermap.org/data/2.5/weather?id=2892794&APPID=7aa91ff4cf71825f909554def466be78'.format(QUERY)
+APP_ID = str('7aa91ff4cf71825f909554def466be78')
+COUNT = sys.argv[1]
 
+try: 
+    if (int(sys.argv[1]) <= 16):
+        COUNT_INFO = int(sys.argv[1]) - 1
+    else:
+        sys.exit(1)
+
+except:
+    print("The argument you entered is not valid! \n"
+	  "You have to enter an Integer between 0 and 16, which is the \n"
+	  "days after today... ")
+    sys.exit(1)
+
+QUERY = '?id={}&units={}'.format(CITY_ID, UNITS)
+URL = 'http://api.openweathermap.org/data/2.5/forecast/daily?id='+CITY_ID+'&APPID='+APP_ID+'&cnt='+COUNT+''.format(QUERY)
 try:
     json = requests.get(URL).json()
 except:
@@ -30,26 +44,13 @@ except:
     sys.exit(1)
 
 # Extract relevant data from the JSON.
-city_name = json['name']
-
+city_name = json['city']['name']
 descriptions = []
-for weather in json['weather']:
+for weather in json['list'][COUNT_INFO]['weather']:
     descriptions.append(weather['description'])
 weather_conditions = ', '.join(descriptions).capitalize()
-
-temp = round(json['main']['temp']) - 273
-temp_min = round(json['main']['temp_min']) - 273
-temp_max = round(json['main']['temp_max']) - 273
-
-# Print weather data using colorama.
-init(strip=not sys.stdout.isatty()) # Strip colors if stdout is redirected.
-
-location = '{}{}\n'.format(Style.BRIGHT, city_name)
-current = '{}{}°{} {}{}{}\n'.format(Fore.GREEN, temp, Fore.RESET,
-                                    Style.DIM, weather_conditions,
-                                    Style.RESET_ALL)
-hi_lo = '{}Hi {}{}°{}  Lo {}{}°{}'.format(Style.BRIGHT, Fore.RED, temp_max,
-                                          Fore.RESET, Fore.BLUE, temp_min,
-                                          Fore.RESET)
-print(location + current + hi_lo)
-
+temp = json['list'][COUNT_INFO]['temp']['day'] - 273
+temp_int = str(int(temp))
+current = '{}°, {}'.format(temp_int, weather_conditions,)
+#print(temp_int + '°')
+print(current)
